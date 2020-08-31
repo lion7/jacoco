@@ -10,24 +10,27 @@
  *    Evgeny Mandrikov - initial API and implementation
  *
  *******************************************************************************/
-package org.jacoco.core.test.validation.java14.targets;
-
-import static org.jacoco.core.test.validation.targets.Stubs.nop;
+package org.jacoco.core.test.validation.kotlin.targets
 
 /**
- * This target exercises pattern matching for instanceof (JEP 305).
+ * This test target contains class implementing interface with default methods.
  */
-public class InstanceofTarget {
+object KotlinDefaultMethodsTarget {
 
-	private static void ifInstanceof(Object e) {
-		if (e instanceof String s) { // assertInstanceof()
-			nop(s);
-		}
-	}
+    interface I {
+        fun m1() = Unit // assertNotCovered()
+        fun m2() = Unit // assertFullyCovered()
+        fun m3() = Unit // assertNotCovered()
+    }
 
-	public static void main(String[] args) {
-		ifInstanceof(new Object());
-		ifInstanceof("string");
-	}
+    class C : I { // assertFullyCovered()
+        override fun m1() = Unit // assertFullyCovered()
+    }
+
+    @JvmStatic
+    fun main(args: Array<String>) {
+        C().m1()
+        C().m2()
+    }
 
 }

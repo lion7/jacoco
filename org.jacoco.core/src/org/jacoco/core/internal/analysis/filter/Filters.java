@@ -33,7 +33,8 @@ public final class Filters implements IFilter {
 	 */
 	public static IFilter all() {
 		return new Filters(new EnumFilter(), new SyntheticFilter(),
-				new SynchronizedFilter(), new TryWithResourcesJavac11Filter(),
+				new BridgeFilter(), new SynchronizedFilter(),
+				new TryWithResourcesJavac11Filter(),
 				new TryWithResourcesJavacFilter(),
 				new TryWithResourcesEcjFilter(), new FinallyFilter(),
 				new PrivateEmptyNoArgConstructorFilter(),
@@ -45,7 +46,7 @@ public final class Filters implements IFilter {
 				new KotlinUnsafeCastOperatorFilter(),
 				new KotlinNotNullOperatorFilter(),
 				new KotlinDefaultArgumentsFilter(), new KotlinInlineFilter(),
-				new KotlinCoroutineFilter());
+				new KotlinCoroutineFilter(), new KotlinDefaultMethodsFilter());
 	}
 
 	private Filters(final IFilter... filters) {
